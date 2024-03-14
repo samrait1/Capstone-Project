@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Main from "../components/Main";
 import requests from "../Requests";
-import GenreSelector from "../components/GenreSelector";
+import GenreSelector from "../pages/GenreSelector";
 
 const Home = () => {
   const [genres, setGenres] = useState([]);
@@ -30,6 +30,7 @@ const Home = () => {
         <>
           <GenreSelector genres={genres} />
           <Main />
+          
         </>
       )}
     </div>
