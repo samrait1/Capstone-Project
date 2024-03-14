@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between p-2 z-[100] w-full absolute backdrop-filter backdrop-blur-lg bg-opacity-50 bg-gray-900">
       <Link to="/">
-        <img className='h-11 w-40' src={Logo} alt=".." />
+        <img className='h-11 w-40 bg-white rounded-md' src={Logo} alt=".." />
       </Link>
       <div className="flex">
         {showSearchForm ? (
@@ -95,10 +95,10 @@ const Navbar = () => {
       ) : (
         <div>
           <Link to="/signIn">
-            <button className="text-[#FFFDE3] pr-4">Sign In</button>
+            <button className="text-[#FFFDE3] pr-4 hover:text-xl hover:text-yellow-600 ">Sign In</button>
           </Link>
           <Link to="/signUp">
-            <button className="text-[#FFFDE3] px-6 py-2 rounded cursor-pointer bg-cyan-600 ">
+            <button className="text-[#FFFDE3] px-6 py-2 rounded cursor-pointer bg-cyan-600 hover:text-xl  ">
               Sign Up
             </button>
           </Link>

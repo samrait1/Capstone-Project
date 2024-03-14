@@ -41,7 +41,7 @@ const SignUp = () => {
                 className="w-full flex flex-col py-4"
               >
                 <input
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-yellow-400"
                   type="email"
                   placeholder="Email"
                   autoComplete="email"
@@ -50,7 +50,7 @@ const SignUp = () => {
                 />
                 
                 <input
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-inherit"
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
@@ -58,21 +58,21 @@ const SignUp = () => {
                   required
                   minLength="6"
                 />
-                <button className="bg-cyan-600 py-3 my-6 rounded font-bold">
+                <button className="bg-cyan-600 py-3 my-6 rounded-l-full text-mono  hover:text-orange-400 font-bold">
                   Sign Up
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">
-                  <p>
+                  <p className="text-xl text-blue-700">
                     <input className="mr-2" type="checkbox" />
                     Remember me
                   </p>
-                  <p>Need Help?</p>
+                  <p className="text-xl text-yellow-400 hover:text-red-900 hover:text-3xl">Need Help?</p>
                 </div>
                 <p className="py-8">
-                  <span className="text-gray-600">
-                    Already subscribed to Cineflix?
+                  <span className=" text-blue-400 font-serif m">
+                    Already subscribed to Movie Ras?
                   </span>{" "}
-                  <Link to="/signIn">Sign In</Link>
+                  <Link to="/signIn" className="ml-3  text-orange-400 hover:text-orange-800 ">Sign In</Link>
                 </p>
               </form>
             </div>
