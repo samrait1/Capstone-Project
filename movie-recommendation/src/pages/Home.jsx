@@ -15,7 +15,8 @@ const Home = () => {
         setGenres(data.genres);
         setIsLoading(false);
       } catch (error) {
-        // Handle error
+        setError("Error occurred while fetching data");
+        setIsLoading(false);
       }
     };
 
