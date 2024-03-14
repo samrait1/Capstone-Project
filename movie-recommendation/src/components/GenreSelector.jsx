@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import requests from "../Requests";
-import Row from "../components/Row";
+import Row from "./Row";
 
 const GenreSelector = ({ genres }) => {
   const [selectedGenre, setSelectedGenre] = useState(null);
