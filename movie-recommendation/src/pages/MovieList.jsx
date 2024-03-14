@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Movie from "../components/Movie";
 import { useSearchParams } from "react-router-dom";
 
-const MovieList = () => {
+const MovieList = ({ searchQuery }) => {
   const [searchParam] = useSearchParams();
   const key = process.env.REACT_APP_IMDB_API_KEY;
 
@@ -11,22 +11,24 @@ const MovieList = () => {
   const [page, setPage] = useState(1);
   const query = searchParam.get("q");
   console.log(query);
-  const url = query ? `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=d9a2926d310b627aa44739b657eac1e2` : `https://api.themoviedb.org/3/movie/now_playing?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=${page}`;
+  const url = query
+    ? `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=d9a2926d310b627aa44739b657eac1e2`
+    : `https://api.themoviedb.org/3/movie/now_playing?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=${page}`;
+
   useEffect(() => {
-    
-    fetchData(url);
-  }, [page,url]);
+    fetchData(url)
+      .then((response) => response.json())
+      .then((data) => setMovies(data.Search));
+  }, [page, url, searchQuery]);
 
   const fetchData = async (url) => {
     try {
-      const response = await fetch(
-        url
-      );
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      setMovies((prevstate) => [...prevstate, ...data.results]);
+      setMovies((prevState) => [...prevState, ...data.results]);
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +37,7 @@ const MovieList = () => {
   console.log(movies);
 
   const loadMore = () => {
-    setPage((prevstate) => prevstate + 1);
+    setPage(page + 1);
   };
 
   return (
