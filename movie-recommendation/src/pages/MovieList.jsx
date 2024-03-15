@@ -16,9 +16,7 @@ const MovieList = ({ searchQuery }) => {
     : `https://api.themoviedb.org/3/movie/now_playing?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=${page}`;
 
   useEffect(() => {
-    fetchData(url)
-      .then((response) => response.json())
-      .then((data) => setMovies(data.Search));
+    fetchData(url);
   }, [page, url, searchQuery]);
 
   const fetchData = async (url) => {
@@ -28,9 +26,13 @@ const MovieList = ({ searchQuery }) => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      setMovies((prevState) => [...prevState, ...data.results]);
+      if (data && data.results) {
+        setMovies((prevState) => [...prevState, ...data.results]);
+      } else {
+        console.error("Invalid data format:", data);
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching data:", error);
     }
   };
 
