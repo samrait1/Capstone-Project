@@ -3,6 +3,11 @@
     color: aliceblue;
     list-style-type: none;
 }
+li {
+    display: inline-flex;
+   
+    font-size: 12px;
+}
 a{
     text-decoration: none;
     color: rgb(50, 164, 67);
@@ -25,19 +30,36 @@ h3{
 }
 .fo{
     color: aliceblue;
+    margin-top: 12px;
+    margin-left: -4px;
+    
 }
 @media (max-width: 768px) {
-    .ul{
+    /* .ul{
         display: block;
         color: aliceblue;
         list-style-type: none;
+    } */
+    .fo {
+        display: inline-flex;
+        font-size: 12px;
     }
   }
   
   @media (min-width: 1200px) {
-    .ul{
+    /* .ul{
         display: flex;
         color: aliceblue;
         list-style-type: none;
+        
+    } */
+    .fo {
+        display: inline-flex;
+        font-size: 12px;
     }
   }
+img {
+    margin-right: 20px;
+    
+    width: 50px;
+}
