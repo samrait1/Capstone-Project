@@ -1,6 +1,7 @@
-import React from 'react'
-import SavedShow from '../components/SavedShow'
-
+import React, { useEffect, useState } from "react";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../Firebase";
+import SavedShow from "../components/SavedShow";
 const Account = () => {
   return (
     <div>
