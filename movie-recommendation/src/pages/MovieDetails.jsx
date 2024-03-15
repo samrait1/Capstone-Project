@@ -70,17 +70,21 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
     <div className=" h-[90vh]"> 
       {showModal ? (
             <>
-              <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+              <div className="justify-center items-center flex overflow-x-hidden 
+              overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                 <div className="relative w-auto my-6 mx-auto max-w-3xl">
                   {/*content*/}
-                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-transparent outline-none focus:outline-none">
+                  <div className="border-0 rounded-lg shadow-lg relative flex 
+                  flex-col w-full bg-transparent outline-none focus:outline-none">
                     {/*header*/}
                     <div className="flex items-start justify-between border-b p-2 ">
                       <button
-                        className="p-1 ml-auto bg-transparent border-0 text-white opacity-100  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                        className="p-1 ml-auto bg-transparent border-0 text-white opacity-100  
+                        float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                         onClick={() => setShowModal(false)}
                       >
-                        <span className="bg-transparent text-white opacity-100  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                        <span className="bg-transparent text-white opacity-100 
+                         h-6 w-6 text-2xl block outline-none focus:outline-none">
                           ×
                         </span>
                       </button>
@@ -171,17 +175,18 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
 
               <p onClick={saveShow} className=" cursor-pointer">
                 {like ? (
+                  <div className="flex flex-row gap-2">
                   <FaHeart className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
+                  <p> Added to Favorites!</p>
+                  </div>
                 ) : (
+                  <div className="flex flex-row gap-2">
                   <FaRegHeart className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
+                  <p> Add to Favorites</p>
+                  </div>
                 )}
               </p>
-              <p>
-                <GiShare className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0" />
-              </p>
-              <p>
-                <FiBookmark className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0" />
-              </p>
+             
             </div>
           </div>
           <div></div>

@@ -38,7 +38,7 @@ const Login = () => {
               <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-white"
                   type="email"
                   placeholder="Email"
                   autoComplete="email"
@@ -46,26 +46,26 @@ const Login = () => {
                 />
                 <input
                   onChange={(e) => setPassword(e.target.value)}
-                  className="p-3 my-2 bg-gray-700 rouded"
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-red-800"
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
                   required
                   minLength="6"
                 />
-                <button className="bg-cyan-600 py-3 my-6 rounded font-bold">
+                <button className="bg-cyan-600 py-3 my-6 rounded-r-full font-bold hover:bg-yellow-600">
                   Sign In
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-600">
-                  <p>
+                  <p className="ml-3 text-xl text-violet-400">
                     <input className="mr-2" type="checkbox" />
                     Remember me
                   </p>
-                  <p>Need Help?</p>
+                  <p className="text-violet-400 font-bold text-xl hover:text-3xl">Need Help?</p>
                 </div>
                 <p className="py-8">
-                  <span className="text-gray-600">New to Cineflix?</span>{" "}
-                  <Link to="/signUp">Sign Up</Link>
+                  <span className="text-orange-600 ml-4 text-xl hover:text-white">New to Movie Ras?</span>{" "}
+                  <Link to="/signUp" className="ml-4 text-xl hover:text-yellow-600">Sign Up</Link>
                 </p>
               </form>
             </div>
