@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import requests from "../Requests";
 import Row from "./Row";
 
 const GenreSelector = ({ genres }) => {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const apiKey = process.env.REACT_APP_IMDB_API_KEY;
 
   useEffect(() => {
     if (genres.length > 0) {
@@ -26,6 +26,7 @@ const GenreSelector = ({ genres }) => {
           <div className="genre-buttons">
             {genres.map((genre) => (
               <button
+                
                 key={genre.id}
                 className={selectedGenre === genre.id ? "active" : ""}
                 onClick={() => handleGenreChange(genre.id)}
@@ -37,7 +38,7 @@ const GenreSelector = ({ genres }) => {
           {selectedGenre && (
             <Row
               title="Movies"
-              fetchURL={`${requests.requestMoviesByGenre}${selectedGenre}`}
+              fetchURL={`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${selectedGenre}`}
             />
           )}
         </>
