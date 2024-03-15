@@ -3,6 +3,10 @@ import Main from "../components/Main";
 import Row from "../components/Row";
 import GenreSelector from "../components/GenreSelector";
 import requests from "../Requests";
+<<<<<<< HEAD
+import GenreSelector from "..//GenreSelector";
+=======
+>>>>>>> 1223251c6d36c084a9a18d5d2f915eda955382a4
 
 const Home = () => {
   const [genres, setGenres] = useState([]);

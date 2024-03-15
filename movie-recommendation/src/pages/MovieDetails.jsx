@@ -25,6 +25,7 @@ const MovieDetails = () => {
   const [like, setLike] = useState(false)
   const [saved,setSaved]= useState(false)
   const {user} = UserAuth()
+  const [favorite, setFavorite] = useState(false)
 
     const movieID = doc(db, 'users', `${user?.email}`);
   //const [playing, setPlaying] = useState(false);
@@ -56,13 +57,14 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
     if (user?.email){
       setLike(!like)
       setSaved(true)
-      await updateDoc(movieID,{
-        savedShows:arrayUnion({
+      await updateDoc(movieID, {
+        savedShows: arrayUnion({
           id: movieData.id,
           title: movieData.title,
-          img:movieData.poster_path
-        })
-      })
+          img: movieData.poster_path,
+          favorite: favorite,
+        }),
+      });
     }else{
       alert ("please log in to save Movies")
     }

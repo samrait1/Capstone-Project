@@ -1,14 +1,18 @@
-import React from "react";
-
-function YearCopyright() {
-  return  <p id="copyright-year">Copyright@{new Date().getFullYear()}. Developed By: Team one</p>;
-}
-
+import React from 'react';
+import './foot.css'
 const Footer = () => {
   return (
-    <div className=" itmes-center justify-center text-gray-400 my-6 hidden md:flex">
-      <YearCopyright/>
-    </div>
+    <footer className="footer">
+         <h3>Contact Us:</h3>
+      <ul className='ul'>
+         
+          <li><a href="#" className='fo'>Email</a></li>
+          <li><a href="#" className='fo'>linkedin</a></li>
+          <li><a href="#" className='fo'>Instagram</a></li>
+          <li><a href="#" className='fo'>Telegram</a></li>
+        </ul>
+        <h6>Copyright &copy 20204 LinkE.com</h6>
+    </footer>
   );
 };
 
