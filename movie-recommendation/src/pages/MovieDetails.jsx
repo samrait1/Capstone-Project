@@ -11,6 +11,8 @@ import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import { arrayUnion,doc,updateDoc } from "@firebase/firestore"; 
 import Row from "../components/Row"
+import { saveShow } from "../firestoreUtils"; // Import the saveShow function
+
 
 
 const MovieDetails = () => {

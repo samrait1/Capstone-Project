@@ -1,12 +1,7 @@
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,8 +12,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
-
-
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);

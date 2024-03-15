@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
-import { db } from "../Firebase";
-import { updateDoc, doc, onSnapshot } from "firebase/firestore";
+import { db } from "../Firebase"; // Importing db from Firebase
+import { doc, onSnapshot, updateDoc, setDoc, arrayUnion } from "firebase/firestore"; // Importing Firestore functions
 import { AiOutlineClose } from "react-icons/ai";
+import { saveShow } from "../firestoreUtils"; // Importing saveShow function from firestoreUtils
 
 const SavedShow = () => {
     const [movies, setMovies] = useState([]);
@@ -12,12 +13,10 @@ const SavedShow = () => {
         const fetchData = async () => {
             try {
                 const docRef = doc(db, 'users', `${user?.email}`);
-                const docSnap = await docRef.get();
-                if (docSnap.exists()) {
-                    setMovies(docSnap.data()?.savedShows || []);
-                } else {
-                    console.log("No such document!");
-                }
+                const unsubscribe = onSnapshot(docRef, (doc) => {
+                    setMovies(doc.data()?.savedShows || []);
+                });
+                return unsubscribe;
             } catch (error) {
                 console.error("Error getting document:", error);
             }
