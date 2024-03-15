@@ -37,7 +37,10 @@ const Home = () => {
           <Row title="Popular" fetchURL={requests.requestPopular} rowID='2' genre="popular" />
           <Row title="Top Rated" fetchURL={requests.requestTopRated} rowID='3' genre="top_rated" />
           <Row title="Trending" fetchURL={requests.requestTrending} rowID='4' genre="popular" />
-          <Row title="Horror" fetchURL={requests.requestHorror} rowID='5' />
+          <Row title="Horror" fetchURL={requests.requestHorror} rowID='5'  genre ="horror"/>
+          <Row title="Romance" fetchURL={requests.requestRomance} rowID='6' genre="romance" />
+          <Row title="Comedy" fetchURL={requests.requestComedy} rowID='7' genre="comedy" />
+          <Row title="Fantasy" fetchURL={requests.requestFantasy} rowID='8' genre="fantasy" />
         </>
       )}
     </div>

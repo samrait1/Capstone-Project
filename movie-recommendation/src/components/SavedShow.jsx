@@ -12,7 +12,7 @@ const SavedShow = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const docRef = doc(db, 'users', user?.email); // Removed unnecessary string interpolation
+                const docRef = doc(db, 'users', user?.id); // Removed unnecessary string interpolation
                 const unsubscribe = onSnapshot(docRef, (doc) => {
                     setMovies(doc.data()?.savedShows || []);
                 });
