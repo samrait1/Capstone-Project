@@ -24,7 +24,7 @@ const Navbar = () => {
     event.preventDefault();
     const queryTerm = event.target.search.value;
     event.target.reset();
-    navigate(`/search?q=${queryTerm}`);  // Update the navigation to the search results page
+    navigate(`/search?q=${queryTerm}`); 
   }
 
   const handleSearchButtonClick = () => {
@@ -36,7 +36,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between p-2 z-[100] w-full absolute backdrop-filter backdrop-blur-lg bg-opacity-50 bg-gray-900">
+    <div className="flex items-center justify-between p-2 z-[100] w-full 
+      absolute backdrop-filter backdrop-blur-lg bg-opacity-50 bg-gray-900">
       <Link to="/">
         <img className='h-11 w-40 bg-white rounded-md' src={Logo} alt=".." />
       </Link>
@@ -48,7 +49,8 @@ const Navbar = () => {
               name="search"
               autoComplete="off"
               id="search-navbar"
-              className="block w-full p-2 text-sm text-gray-900 border-b border-gray-300 bg-transparent  dark:text-white dark:border-gray-600 dark:bg-transparent dark:placeholder-gray-400"
+              className="block w-full p-2 text-sm text-gray-900 border-b border-gray-300 bg-transparent  
+              dark:text-white dark:border-gray-600 dark:bg-transparent dark:placeholder-gray-400"
               placeholder="Search..."
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
@@ -83,7 +85,8 @@ const Navbar = () => {
 
           <button
             onClick={handleLogOut}
-            className="text-[#FFFDE3] px-6 py-2 rounded cursor-pointer bg-[#00204a] "
+            className="text-[#FFFDE3] px-6 py-2 rounded 
+            cursor-pointer bg-[#00204a] "
           >
             Logout
           </button>
@@ -91,10 +94,12 @@ const Navbar = () => {
       ) : (
         <div>
           <Link to="/signIn">
-            <button className="text-[#FFFDE3] pr-4 hover:text-xl hover:text-yellow-600 ">Sign In</button>
+            <button className="text-[#FFFDE3] pr-4 
+              hover:text-xl hover:text-yellow-600 ">Sign In</button>
           </Link>
           <Link to="/signUp">
-            <button className="text-[#FFFDE3] px-6 py-2 rounded cursor-pointer bg-cyan-600 hover:text-xl  ">
+            <button className="text-[#FFFDE3] px-6 py-2 
+              rounded cursor-pointer bg-cyan-600 hover:text-xl  ">
               Sign Up
             </button>
           </Link>
