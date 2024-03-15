@@ -67,9 +67,7 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
       alert ("please log in to save Movies")
     }
   }
-  const toggleFavorite = () => {
-    setFavorite(!favorite);
-  };
+
   return (
     <div className=" h-[90vh]"> 
       {showModal ? (
