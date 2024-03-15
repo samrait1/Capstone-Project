@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase"; // Importing db from Firebase
-import { doc, onSnapshot, updateDoc, setDoc, arrayUnion } from "firebase/firestore"; // Importing Firestore functions
+import { doc, onSnapshot, updateDoc } from "firebase/firestore"; // Importing Firestore functions
 import { AiOutlineClose } from "react-icons/ai";
 import { saveShow } from "../firestoreUtils"; // Importing saveShow function from firestoreUtils
 
@@ -12,7 +12,7 @@ const SavedShow = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const docRef = doc(db, 'users', `${user?.email}`);
+                const docRef = doc(db, 'users', user?.email); // Removed unnecessary string interpolation
                 const unsubscribe = onSnapshot(docRef, (doc) => {
                     setMovies(doc.data()?.savedShows || []);
                 });
@@ -22,17 +22,26 @@ const SavedShow = () => {
             }
         };
         fetchData();
-    }, [user?.email]);
+    }, [user]); // Removed unnecessary email dependency
 
     const deleteShow = async (passId) => {
         try {
-            const result = movies.filter((item) => item.id !== passId);
-            const movieRef = doc(db, 'users', `${user?.email}`);
+            const updatedMovies = movies.filter((item) => item.id !== passId); // Renamed result to updatedMovies
+            const movieRef = doc(db, 'users', user?.email);
             await updateDoc(movieRef, {
-                savedShows: result
+                savedShows: updatedMovies // Updated to use updatedMovies
             });
         } catch (error) {
-            console.log(error);
+            console.log("Error deleting show:", error);
+        }
+    };
+
+    const handleSaveShow = async (showData) => {
+        try {
+            await saveShow(user?.email, showData);
+            console.log("Show saved successfully!");
+        } catch (error) {
+            console.error("Error saving show:", error);
         }
     };
 
@@ -40,8 +49,8 @@ const SavedShow = () => {
         <div>
             <div className="mx-auto max-w-2xl py-10 px-2 sm:py-10 sm:px-6 lg:max-w-7xl">
                 <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                    {movies.map((item, index) => (
-                        <div key={index} className="inline-block cursor-pointer relative ">
+                    {movies.map((item) => ( // Removed unnecessary index parameter
+                        <div key={item.id} className="inline-block cursor-pointer relative ">
                             <img
                                 className="w-full h-auto block"
                                 src={`https://image.tmdb.org/t/p/w500${item?.img}`}

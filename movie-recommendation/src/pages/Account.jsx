@@ -6,16 +6,20 @@ import { UserAuth } from "../context/AuthContext";
 
 const Account = () => {
   const [savedShows, setSavedShows] = useState([]);
-  const { user } = UserAuth(); 
+  const { user } = UserAuth();
 
   useEffect(() => {
     const fetchSavedShows = async () => {
       if (user) {
-        const userID = user.uid;
-        const savedShowsRef = collection(db, "users", userID, "savedShows");
-        const savedShowsSnapshot = await getDocs(savedShowsRef);
-        const savedShowsData = savedShowsSnapshot.docs.map((doc) => doc.data());
-        setSavedShows(savedShowsData);
+        try {
+          const userID = user.uid;
+          const savedShowsRef = collection(db, "users", userID, "savedShows");
+          const savedShowsSnapshot = await getDocs(savedShowsRef);
+          const savedShowsData = savedShowsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          setSavedShows(savedShowsData);
+        } catch (error) {
+          console.error("Error fetching saved shows:", error);
+        }
       }
     };
 
