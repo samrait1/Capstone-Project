@@ -3,7 +3,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import Logo from '../images/logo.png';
 import { FaSearch } from "react-icons/fa";
-import MovieList from "../pages/MovieList";
 
 const Navbar = () => {
   const { user, logOut } = UserAuth();
@@ -25,7 +24,7 @@ const Navbar = () => {
     event.preventDefault();
     const queryTerm = event.target.search.value;
     event.target.reset();
-    navigate(`/?q=${queryTerm}`);
+    navigate(`/search?q=${queryTerm}`);  // Update the navigation to the search results page
   }
 
   const handleSearchButtonClick = () => {
@@ -76,9 +75,6 @@ const Navbar = () => {
           </button>
         )}
       </div>
-      {location.search && (
-        <MovieList searchQuery={location.search.slice(3)} />
-      )}
       {user?.email ? (
         <div>
           <Link to="/account">
