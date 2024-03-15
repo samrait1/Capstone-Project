@@ -26,6 +26,7 @@ const GenreSelector = ({ genres }) => {
           <div className="genre-buttons">
             {genres.map((genre) => (
               <button
+                
                 key={genre.id}
                 className={selectedGenre === genre.id ? "active" : ""}
                 onClick={() => handleGenreChange(genre.id)}
