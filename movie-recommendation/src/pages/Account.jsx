@@ -33,9 +33,17 @@ const Account = () => {
         </div>
         
       </div classNam="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-4">Saved Shows</h2>
+       <h2 className="text-2xl font-bold mb-4">Saved Shows</h2>
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {savedShows.map((show) => (
-        <SavedShow key={show.id} show={show} />
+        <div key={show.id} className="bg-gray-800 p-4 rounded-lg">
+        <img
+          src={show.img || "https://via.placeholder.com/150"}
+          alt={show.title}
+          className="w-full h-64 object-cover rounded-lg"
+        />
+        <h3 className="text-white text-lg font-semibold mt-2">{show.title}</h3>
+        </div>
       ))}
         </div>
       </div>
