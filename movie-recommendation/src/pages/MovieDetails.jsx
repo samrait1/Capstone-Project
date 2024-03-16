@@ -206,3 +206,4 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
     </div>
   );
 };
+export default MovieDetails;
