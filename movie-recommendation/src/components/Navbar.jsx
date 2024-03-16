@@ -39,7 +39,7 @@ const Navbar = () => {
     <div className="flex items-center justify-between p-2 z-[100] w-full 
       absolute backdrop-filter backdrop-blur-lg bg-opacity-50 bg-gray-900">
       <Link to="/">
-        <img className='h-11 w-40 hover:bg-neutral-50 bg-red-400' src={Logo} alt=".." />
+        <img className='h-11 w-40 bg-white rounded-md' src={Logo} alt=".." />
       </Link>
       <div className="flex">
         {showSearchForm ? (

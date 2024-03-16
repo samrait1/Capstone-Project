@@ -3,7 +3,6 @@ import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { FiChevronsRight } from 'react-icons/fi';
-
 import Movie from "./Movie";
 
 const Row = ({ title, fetchURL,rowID,genre}) => {

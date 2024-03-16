@@ -9,10 +9,9 @@ import { FiBookmark } from "react-icons/fi";
 import { GiShare } from "react-icons/gi";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
-import { arrayUnion,doc,updateDoc } from "@firebase/firestore"; 
+import { arrayUnion, doc, updateDoc } from "@firebase/firestore";
 import Row from "../components/Row"
 import { saveShow } from "../firestoreUtils"; // Import the saveShow function
-
 
 
 const MovieDetails = () => {
@@ -26,23 +25,25 @@ const MovieDetails = () => {
   const [trailer, setTrailer] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [like, setLike] = useState(false)
-  const [saved,setSaved]= useState(false)
-  const {user} = UserAuth()
+  const [saved, setSaved] = useState(false)
+  const { user } = UserAuth()
   const [favorite, setFavorite] = useState(false)
 
-    const movieID = doc(db, 'users', `${user?.email}`);
+  const movieID = doc(db, 'users', `${user?.email}`);
   //const [playing, setPlaying] = useState(false);
-// https://api.themoviedb.org/3/movie/now_playing?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=1
-const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a2926d310b627aa44739b657eac1e2&append_to_response=videos`;
+  // https://api.themoviedb.org/3/movie/now_playing?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=1
+  const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a2926d310b627aa44739b657eac1e2&append_to_response=videos`;
   useEffect(() => {
     fetchData(url);
   }, [url]);
+  useEffect(() => {
+    // Reset the like state when a new movie is fetched
+    setLike(false);
+  }, [url]); // Reset when the URL changes
 
   const fetchData = async (url) => {
     axios
-      .get(
-        url
-      )
+      .get(url)
       .then((response) => {
         setMovieData(response.data);
         const trailerid = response.data.videos.results.find(
@@ -55,77 +56,90 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
       });
   };
   console.log(movieData);
-
-  const saveShow = async()=>{
-    if (user?.email){
+  
+  
+  const saveShow = async () => {
+    if (user?.email) {
+      // Toggle the like state
       setLike(!like);
-      setSaved(true);
-      const isFavorite = !like;
-      await updateDoc(movieID, {
-        savedShows: arrayUnion({
-          id: movieData.id,
-          title: movieData.title,
-          img: movieData.poster_path,
-          favorite: isFavorite,
-        }),
-      });
-    }else{
-      alert ("please log in to save Movies")
+  
+      // If the movie is already saved, remove it from savedShows
+      if (like) {
+        const updatedSavedShows = movieData.savedShows.filter(
+          (show) => show.id !== movieData.id
+        );
+        await updateDoc(movieID, {
+          savedShows: updatedSavedShows,
+        });
+      } else {
+        // Include all properties of the movie object along with the URL
+        const url = `https://www.themoviedb.org/movie/${movieData.id}`;
+  
+        // Save the entire movieData object along with the URL to Firestore
+        await updateDoc(movieID, {
+          savedShows: arrayUnion({
+            ...movieData,
+            url,
+          }),
+        });
+      }
+    } else {
+      alert("Please log in to save Movies");
     }
-  }
+  };
+  
 
   return (
-    <div className=" h-[90vh]"> 
+    <div className=" h-[90vh]">
       {showModal ? (
-            <>
-              <div className="justify-center items-center flex overflow-x-hidden 
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden 
               overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                  {/*content*/}
-                  <div className="border-0 rounded-lg shadow-lg relative flex 
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex 
                   flex-col w-full bg-transparent outline-none focus:outline-none">
-                    {/*header*/}
-                    <div className="flex items-start justify-between border-b p-2 ">
-                      <button
-                        className="p-1 ml-auto bg-transparent border-0 text-white opacity-100  
+                {/*header*/}
+                <div className="flex items-start justify-between border-b p-2 ">
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-white opacity-100  
                         float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                        onClick={() => setShowModal(false)}
-                      >
-                        <span className="bg-transparent text-white opacity-100 
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-white opacity-100 
                          h-6 w-6 text-2xl block outline-none focus:outline-none">
-                          ×
-                        </span>
-                      </button>
-                    </div>
-                    {/*body*/}
-                    <>
-                      <Youtube
-                        videoId={trailer.key}
-                        className="w-[50vh] h-[50vh] md:w-[100vh] md:h-[60vh]"
-                        opts={{
-                          width: "100%",
-                          height: "100%",
-                        }}
-                      />
-                    </>
-
-                    {/*footer*/}
-                  </div>
+                      ×
+                    </span>
+                  </button>
                 </div>
+                {/*body*/}
+                <>
+                  <Youtube
+                    videoId={trailer.key}
+                    className="w-[50vh] h-[50vh] md:w-[100vh] md:h-[60vh]"
+                    opts={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </>
+
+                {/*footer*/}
               </div>
-              <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
-              
-     </>
-          ) : null}
+            </div>
+          </div>
+          <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
+
+        </>
+      ) : null}
 
       <div className="">
         <div className="absolute w-full h-[70vh] bg-gradient-to-t from-black ">
           {" "}
         </div>
         <img
-          src={`https://image.tmdb.org/t/p/original${
-            movieData.backdrop_path || movieData.poster_path
-          }`}
+          src={`https://image.tmdb.org/t/p/original${movieData.backdrop_path || movieData.poster_path
+            }`}
           alt=""
           className="w-full h-[70vh] object-cover "
         />
@@ -184,26 +198,27 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
               <p onClick={saveShow} className=" cursor-pointer">
                 {like ? (
                   <div className="flex flex-row gap-2">
-                  <FaHeart className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
-                  <p> Added to Favorites!</p>
+                    <FaHeart className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
+                    <p> Added to Favorites!</p>
                   </div>
                 ) : (
                   <div className="flex flex-row gap-2">
-                  <FaRegHeart className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
-                  <p> Add to Favorites</p>
+                    <FaRegHeart className="text-gray-300 text-2xl ml-6 mb-8 md:mb-0" />
+                    <p> Add to Favorites</p>
                   </div>
                 )}
               </p>
-             
+
             </div>
           </div>
           <div></div>
         </div>
       </div>
       <br /><br /><br /><br /><br /> <br />
-      <Row title="Recommendations" className="mt-12 py-12" fetchURL={`https://api.themoviedb.org/3/movie/${params.movieId}/recommendations?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=1`} rowID= '1' genre="upcoming" />
-            
+      <Row title="Recommendations" className="mt-12 py-12" fetchURL={`https://api.themoviedb.org/3/movie/${params.movieId}/recommendations?api_key=d9a2926d310b627aa44739b657eac1e2&language=en-US&page=1`} rowID='1' genre="upcoming" />
+
     </div>
   );
 };
+
 export default MovieDetails;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase"; // Importing db from Firebase
 import { doc, onSnapshot, updateDoc } from "firebase/firestore"; // Importing Firestore functions
@@ -12,11 +12,9 @@ const SavedShow = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const docRef = doc(db, 'users', user?.id); // Removed unnecessary string interpolation
+                const docRef = doc(db, 'users', user?.email);
                 const unsubscribe = onSnapshot(docRef, (doc) => {
-                    // Filter only the shows marked as favorite
-                    const favoriteShows = (doc.data()?.savedShows || []).filter(show => show.favorite);
-                    setMovies(favoriteShows);
+                    setMovies(doc.data()?.savedShows || []);
                 });
                 return unsubscribe;
             } catch (error) {
@@ -24,15 +22,16 @@ const SavedShow = () => {
             }
         };
         fetchData();
-    }, [user?.uid]); // Updated to use user.uid as dependency
+    }, [user]); // Removed unnecessary email dependency
 
     const deleteShow = async (passId) => {
         try {
-            const updatedMovies = movies.filter((item) => item.id !== passId);
-            const movieRef = doc(db, 'users', user?.uid); // Updated to use user.uid
+            const updatedMovies = movies.filter((item) => item.id !== passId); // Renamed result to updatedMovies
+            const movieRef = doc(db, 'users', user?.email);
             await updateDoc(movieRef, {
-                savedShows: updatedMovies
+                savedShows: updatedMovies // Updated to use updatedMovies
             });
+            setMovies(updatedMovies); // Update local state
         } catch (error) {
             console.log("Error deleting show:", error);
         }
@@ -40,7 +39,8 @@ const SavedShow = () => {
 
     const handleSaveShow = async (showData) => {
         try {
-            await saveShow(user?.uid, showData); // Updated to use user.uid
+            await saveShow(user?.email, showData);
+            setMovies([...movies, showData]); // Update local state
             console.log("Show saved successfully!");
         } catch (error) {
             console.error("Error saving show:", error);
@@ -59,7 +59,7 @@ const SavedShow = () => {
                                 alt=""
                             />
                             <div className="absolute top-0 left-0 w-full h-full hover:bg-black/60 opacity-0 hover:opacity-100 text-white">
-                                <p onClick={() => deleteShow(item.id)} className="absolute text-gray-300 top-4 right-4"><AiOutlineClose/></p>
+                                <p onClick={() => deleteShow(item.id)} className="absolute text-gray-300 top-4 right-4"><AiOutlineClose /></p>
                             </div>
                         </div>
                     ))}

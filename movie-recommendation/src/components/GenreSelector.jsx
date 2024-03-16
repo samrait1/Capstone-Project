@@ -19,6 +19,9 @@ const GenreSelector = ({ genres }) => {
 
   return (
     <div>
+      {isLoading ? (
+        <div className="loading-spinner">Loading...</div>
+      ) : (
         <>
           <div className="genre-buttons">
             {genres.map((genre) => (
@@ -39,7 +42,7 @@ const GenreSelector = ({ genres }) => {
             />
           )}
         </>
-      
+      )}
     </div>
   );
 };

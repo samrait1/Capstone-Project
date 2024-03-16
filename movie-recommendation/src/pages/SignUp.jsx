@@ -50,7 +50,7 @@ const SignUp = () => {
                 />
                 
                 <input
-                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-white hover:text-red-800"
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-inherit"
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
@@ -69,10 +69,10 @@ const SignUp = () => {
                   <p className="text-xl text-yellow-400 hover:text-red-900 hover:text-3xl">Need Help?</p>
                 </div>
                 <p className="py-8">
-                  <span className=" text-blue-400 font-mono  ">
-                    Already subscribed to cinema Ras?
+                  <span className=" text-blue-400 font-serif m">
+                    Already subscribed to Movie Ras?
                   </span>{" "}
-                  <Link to="/signIn" className="ml-[45%]  text-orange-400 hover:text-red-800 hover:text-xl ">Sign In</Link>
+                  <Link to="/signIn" className="ml-3  text-orange-400 hover:text-orange-800 ">Sign In</Link>
                 </p>
               </form>
             </div>
