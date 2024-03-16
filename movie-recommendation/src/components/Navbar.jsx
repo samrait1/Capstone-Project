@@ -51,7 +51,7 @@ const Navbar = () => {
               name="search"
               autoComplete="off"
               id="search-navbar"
-              className="block w-full p-2 text-sm text-gray-900 border-b border-gray-300 bg-transparent  
+              className="block w-full p-2 text-sm text-white border-b border-gray-300 bg-transparent  
               dark:text-white dark:border-gray-600 dark:bg-transparent dark:placeholder-gray-400"
               placeholder="Search..."
               value={searchValue}
