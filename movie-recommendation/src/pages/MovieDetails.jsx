@@ -63,13 +63,16 @@ const MovieDetails = () => {
       // Toggle the like state
       setLike(!like);
   
+      // Initialize savedShows if it's undefined
+      const updatedSavedShows = movieData.savedShows || [];
+  
       // If the movie is already saved, remove it from savedShows
       if (like) {
-        const updatedSavedShows = movieData.savedShows.filter(
+        const updatedShows = updatedSavedShows.filter(
           (show) => show.id !== movieData.id
         );
         await updateDoc(movieID, {
-          savedShows: updatedSavedShows,
+          savedShows: updatedShows,
         });
       } else {
         // Include all properties of the movie object along with the URL
@@ -87,7 +90,17 @@ const MovieDetails = () => {
       alert("Please log in to save Movies");
     }
   };
+
+
+  const shareMovie = () => {
+    navigator.share({
+        title: movieData.title || movieData.original_title,
+        url: window.location.href,
+      })
+      .then(() => console.log("Shared successfully."))
+      .catch((error) => console.log("Error sharing:", error));
   
+    };
 
   return (
     <div className=" h-[90vh]">
@@ -207,6 +220,9 @@ const MovieDetails = () => {
                     <p> Add to Favorites</p>
                   </div>
                 )}
+              </p>
+              <p>
+                <GiShare className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0"  onClick={shareMovie}/>
               </p>
 
             </div>

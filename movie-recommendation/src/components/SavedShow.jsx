@@ -37,16 +37,6 @@ const SavedShow = () => {
         }
     };
 
-    const handleSaveShow = async (showData) => {
-        try {
-            await saveShow(user?.email, showData);
-            setMovies([...movies, showData]); // Update local state
-            console.log("Show saved successfully!");
-        } catch (error) {
-            console.error("Error saving show:", error);
-        }
-    };
-
     return (
         <div>
             <div className="mx-auto max-w-2xl py-10 px-2 sm:py-10 sm:px-6 lg:max-w-7xl">
@@ -59,7 +49,7 @@ const SavedShow = () => {
                                 alt=""
                             />
                             <div className="absolute top-0 left-0 w-full h-full hover:bg-black/60 opacity-0 hover:opacity-100 text-white">
-                                <p onClick={() => deleteShow(item.id)} className="absolute text-gray-300 top-4 right-4"><AiOutlineClose /></p>
+                                <button onClick={() => deleteShow(item.id)} className="absolute text-gray-300 top-4 right-4"><AiOutlineClose /></button>
                             </div>
                         </div>
                     ))}

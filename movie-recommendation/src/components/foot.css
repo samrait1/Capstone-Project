@@ -3,6 +3,11 @@
     color: aliceblue;
     list-style-type: none;
 }
+li {
+    display: inline-flex;
+   
+    font-size: 18px;
+}
 a{
     text-decoration: none;
     color: rgb(50, 164, 67);
@@ -25,12 +30,32 @@ h3{
 }
 .fo{
     color: aliceblue;
+    margin-top: 12px;
+    margin-left: -4px;
+    margin-right: 10px;
 }
-@media (max-width: 768px) {
-    .ul{
-        display: block;
-        color: aliceblue;
-        list-style-type: none;
+
+  @media (max-width: 768px) {
+    .ul {
+      display: block;
+      color: aliceblue;
+      list-style-type: none;
+    }
+    
+    .ul li {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  
+    .ul li img {
+      margin-right: 5px;
+    }
+  
+    .fo {
+      font-size: 15px;
+      text-decoration: none;
+      color: inherit;
     }
   }
   
@@ -39,5 +64,15 @@ h3{
         display: flex;
         color: aliceblue;
         list-style-type: none;
+        
+    }
+    .fo {
+        display: inline-flex;
+        font-size: 18px;
     }
   }
+img {
+    margin-right: 20px;
+    
+    width: 50px;
+}
