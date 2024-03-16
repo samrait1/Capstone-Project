@@ -12,7 +12,7 @@ const SavedShow = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const docRef = doc(db, 'users', user?.uid);
+                const docRef = doc(db, 'users', user?.id); // Removed unnecessary string interpolation
                 const unsubscribe = onSnapshot(docRef, (doc) => {
                     // Filter only the shows marked as favorite
                     const favoriteShows = (doc.data()?.savedShows || []).filter(show => show.favorite);
