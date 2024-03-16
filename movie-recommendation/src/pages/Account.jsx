@@ -30,10 +30,15 @@ const Account = () => {
         <h1 className='absolute right-0 left-0 bottom-0 top-[20%] text-3xl md:text-5xl font-bold text-center'>
           My Saved Shows
         </h1>
-      </div>
+        </div>
+        
+      </div classNam="container mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold mb-4">Saved Shows</h2>
       {savedShows.map((show) => (
         <SavedShow key={show.id} show={show} />
       ))}
+        </div>
+      </div>
     </div>
   );
 };
