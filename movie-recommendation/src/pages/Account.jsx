@@ -15,7 +15,7 @@ const Account = () => {
           setSavesShows(doc.data().savedShows);
       }
       });
-  
+     return () => unsubscribe();
   }, [user?.email]); // Include user as a dependency to trigger the effect when user changes
 
   return (
