@@ -61,18 +61,11 @@ const SignUp = () => {
                 <button className="bg-cyan-600 py-3 my-6 rounded-l-full text-mono  hover:text-orange-400 font-bold">
                   Sign Up
                 </button>
-                <div className="flex justify-between items-center text-sm text-gray-600">
-                  <p className="text-xl text-blue-700">
-                    <input className="mr-2" type="checkbox" />
-                    Remember me
-                  </p>
-                  <p className="text-xl text-yellow-400 hover:text-red-900 hover:text-3xl">Need Help?</p>
-                </div>
                 <p className="py-8">
                   <span className=" text-blue-400 font-mono  ">
                     Already subscribed to cinema Ras?
                   </span>{" "}
-                  <Link to="/signIn" className="ml-[45%]  text-orange-400 hover:text-red-800 hover:text-xl ">Sign In</Link>
+                  <Link to="/signIn" className="ml-[45%]  text-blue-200 hover:text-blue-500 hover:text-xl ">Sign In</Link>
                 </p>
               </form>
             </div>
