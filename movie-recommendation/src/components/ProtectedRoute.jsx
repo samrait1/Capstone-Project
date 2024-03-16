@@ -9,7 +9,7 @@ const ProtectedRoute = ({children}) => {
     }else{
         return children
     }
-    <Footer/>
+    // <Footer/>
 }
 
 export default ProtectedRoute

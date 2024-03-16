@@ -38,7 +38,7 @@ const Login = () => {
               <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
-                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-gray-600 text-black"
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-yellow-600 text-black"
                   type="email"
                   placeholder="Email"
                   autoComplete="email"
@@ -46,7 +46,7 @@ const Login = () => {
                 />
                 <input
                   onChange={(e) => setPassword(e.target.value)}
-                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-gray-600 text-black "
+                  className="p-3 my-2 bg-gray-700 rounded-full hover:bg-white text-black "
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
@@ -57,7 +57,7 @@ const Login = () => {
                   Sign In
                 </button>
                 <p className="py-8">
-                  <span className="text-orange-600 ml-4 text-xl hover:text-white">New to Movie Ras?</span>{" "}
+                  <span className="text-orange-600 ml-4 text-xl hover:text-white">New to cinema Ras?</span>{" "}
                   <Link to="/signUp" className="ml-4 text-xl hover:text-yellow-600">Sign Up</Link>
                 </p>
               </form>

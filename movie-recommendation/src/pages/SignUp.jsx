@@ -58,7 +58,7 @@ const SignUp = () => {
                   required
                   minLength="6"
                 />
-                <button className="bg-cyan-600 py-3 my-6 rounded-l-full text-mono  hover:text-orange-400 font-bold">
+                <button className="bg-cyan-600 py-3 my-6 rounded-l-full text-mono  hover:bg-orange-400 font-bold">
                   Sign Up
                 </button>
                 <p className="py-8">

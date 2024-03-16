@@ -40,7 +40,7 @@ const Navbar = () => {
       absolute backdrop-filter backdrop-blur-lg bg-opacity-50 bg-gray-900">
      <div className="top-0 h-10 mt-[-20px]">
             <Link to="/">
-              <img className="h-8 w-40 hover:bg-neutral-50 bg-red-400" src={Logo} alt="Logo" />
+              <img className="h-12 w-40 hover:bg-neutral-50 bg-red-400" src={Logo} alt="Logo" />
             </Link>
           </div>
       <div className="flex">
