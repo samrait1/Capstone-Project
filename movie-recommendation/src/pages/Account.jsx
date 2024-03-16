@@ -9,22 +9,14 @@ const Account = () => {
   const { user } = UserAuth();
 
   useEffect(() => {
-    const fetchSavedShows = async () => {
-      if (user) {
-        try {
-          const userID = user.uid;
-          const savedShowsRef = collection(db, "users", userID, "savedShows");
-          const savedShowsSnapshot = await getDocs(savedShowsRef);
-          const savedShowsData = savedShowsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-          setSavedShows(savedShowsData);
-        } catch (error) {
-          console.error("Error fetching saved shows:", error);
-        }
+    if(usser){
+      const unsubscribe = onSnapshot(doc(db, "users", `${user.email}`), (doc) =>{
+        if(doc.exists()) {
+          setSavesShows(doc.data().savedShows);
       }
-    };
-
-    fetchSavedShows();
-  }, [user]); // Include user as a dependency to trigger the effect when user changes
+      });
+  
+  }, [user?.email]); // Include user as a dependency to trigger the effect when user changes
 
   return (
     <div>
