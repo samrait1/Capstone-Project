@@ -10,7 +10,7 @@ const Navbar = () => {
   const location = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const [showSearchForm, setShowSearchForm] = useState(false);
-
+// for handling log out
   const handleLogOut = async () => {
     try {
       await logOut();
