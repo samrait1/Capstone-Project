@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../Firebase";
-import SavedShow from "../components/SavedShow";
 import { UserAuth } from "../context/AuthContext";
+import { db } from "../Firebase";
+import { onSnapshot, doc } from "firebase/firestore";
+import Movie from "../components/Movie";
 
 const Account = () => {
   const [savedShows, setSavedShows] = useState([]);
   const { user } = UserAuth();
 
   useEffect(() => {
-    if(usser){
-      const unsubscribe = onSnapshot(doc(db, "users", `${user.email}`), (doc) =>{
-        if(doc.exists()) {
-          setSavesShows(doc.data().savedShows);
-      }
-      });
-     return () => unsubscribe();
+    if (user) {
+      const unsubscribe = onSnapshot(
+        doc(db, "users", `${user.email}`),
+        (doc) => {
+          if (doc.exists()) {
+            setSavedShows(doc.data().savedShows);
+          }
+        }
+      );
+
+      return () => unsubscribe();
+    }
   }, [user?.email]);
 
   return (
-   <div>
+    <div>
       <div className="w-full text-white">
         <img
           className="w-full h-[400px] object-cover"
@@ -42,7 +47,11 @@ const Account = () => {
               </div>
             ))}
           </div>
-        ) :
+        ) : (
+          <p>No saved shows yet.</p>
+        )}
+      </div>
+    </div>
   );
 };
 
