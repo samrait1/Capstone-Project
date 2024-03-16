@@ -19,7 +19,10 @@ const MovieDetails = () => {
   const params = useParams();
   const key = process.env.REACT_APP_IMDB_API_KEY;
 
-  const [movieData, setMovieData] = useState([]);
+  const [movieData, setMovieData] = useState({
+    info: [],
+    liked: false
+  });
   const [trailer, setTrailer] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [like, setLike] = useState(false)
@@ -55,14 +58,15 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
 
   const saveShow = async()=>{
     if (user?.email){
-      setLike(!like)
-      setSaved(true)
+      setLike(!like);
+      setSaved(true);
+      const isFavorite = !like;
       await updateDoc(movieID, {
         savedShows: arrayUnion({
           id: movieData.id,
           title: movieData.title,
           img: movieData.poster_path,
-          favorite: favorite,
+          favorite: isFavorite,
         }),
       });
     }else{
@@ -202,5 +206,3 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
     </div>
   );
 };
-
-export default MovieDetails;
