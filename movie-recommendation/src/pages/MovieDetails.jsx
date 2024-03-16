@@ -73,7 +73,15 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
       alert ("please log in to save Movies")
     }
   }
-
+  const shareMovie = () => {
+      navigator.share({
+          title: movieData.title || movieData.original_title,
+          url: window.location.href,
+        })
+        .then(() => console.log("Shared successfully."))
+        .catch((error) => console.log("Error sharing:", error));
+    
+  };
   return (
     <div className=" h-[90vh]"> 
       {showModal ? (
@@ -194,7 +202,9 @@ const url = `https://api.themoviedb.org/3/movie/${params.movieId}?api_key=d9a292
                   </div>
                 )}
               </p>
-             
+              <p>
+                <GiShare className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0"  onClick={shareMovie}/>
+              </p>
             </div>
           </div>
           <div></div>
