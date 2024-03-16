@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../Firebase"; // Importing db from Firebase
 import { doc, onSnapshot, updateDoc } from "firebase/firestore"; // Importing Firestore functions
@@ -12,9 +12,11 @@ const SavedShow = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const docRef = doc(db, 'users', user?.email); // Removed unnecessary string interpolation
+                const docRef = doc(db, 'users', user?.uid);
                 const unsubscribe = onSnapshot(docRef, (doc) => {
-                    setMovies(doc.data()?.savedShows || []);
+                    // Filter only the shows marked as favorite
+                    const favoriteShows = (doc.data()?.savedShows || []).filter(show => show.favorite);
+                    setMovies(favoriteShows);
                 });
                 return unsubscribe;
             } catch (error) {
@@ -22,14 +24,14 @@ const SavedShow = () => {
             }
         };
         fetchData();
-    }, [user]); // Removed unnecessary email dependency
+    }, [user?.uid]); // Updated to use user.uid as dependency
 
     const deleteShow = async (passId) => {
         try {
-            const updatedMovies = movies.filter((item) => item.id !== passId); // Renamed result to updatedMovies
-            const movieRef = doc(db, 'users', user?.email);
+            const updatedMovies = movies.filter((item) => item.id !== passId);
+            const movieRef = doc(db, 'users', user?.uid); // Updated to use user.uid
             await updateDoc(movieRef, {
-                savedShows: updatedMovies // Updated to use updatedMovies
+                savedShows: updatedMovies
             });
         } catch (error) {
             console.log("Error deleting show:", error);
@@ -38,7 +40,7 @@ const SavedShow = () => {
 
     const handleSaveShow = async (showData) => {
         try {
-            await saveShow(user?.email, showData);
+            await saveShow(user?.uid, showData); // Updated to use user.uid
             console.log("Show saved successfully!");
         } catch (error) {
             console.error("Error saving show:", error);
@@ -49,7 +51,7 @@ const SavedShow = () => {
         <div>
             <div className="mx-auto max-w-2xl py-10 px-2 sm:py-10 sm:px-6 lg:max-w-7xl">
                 <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                    {movies.map((item) => ( // Removed unnecessary index parameter
+                    {movies.map((item) => (
                         <div key={item.id} className="inline-block cursor-pointer relative ">
                             <img
                                 className="w-full h-auto block"

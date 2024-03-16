@@ -22,7 +22,7 @@ function App() {
           <Route path="/signIn" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-          <Route path="/search" element={<SearchResults />} /> {/* New route for search results */}
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/:genre" element={<MovieList />} />
           <Route path="/:genre/:movieId" element={<MovieDetails />} />
         </Routes>

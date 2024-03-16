@@ -26,6 +26,9 @@ const Account = () => {
     fetchSavedShows();
   }, [user]); // Include user as a dependency to trigger the effect when user changes
 
+  // Filter saved shows to only include those marked as favorites
+  const favoriteShows = savedShows.filter((show) => show.favorite);
+
   return (
     <div>
       <div className='w-full text-white'>
@@ -39,7 +42,7 @@ const Account = () => {
           My Saved Shows
         </h1>
       </div>
-      {savedShows.map((show) => (
+      {favoriteShows.map((show) => (
         <SavedShow key={show.id} show={show} />
       ))}
     </div>
