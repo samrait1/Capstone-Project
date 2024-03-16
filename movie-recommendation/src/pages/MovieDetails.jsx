@@ -224,7 +224,6 @@ const MovieDetails = () => {
               <p>
                 <GiShare className="text-gray-300 text-2xl ml-3 mb-8 md:mb-0"  onClick={shareMovie}/>
               </p>
-
             </div>
           </div>
           <div></div>
